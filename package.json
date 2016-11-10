@@ -1,0 +1,29 @@
+{
+  "name": "RML8",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "mocha tests.js"
+  },
+  "dependencies": {
+    "body-parser": "1.15.1",
+    "co": "4.6.0",
+    "commander": "2.9.0",
+    "duniter": "0.50.0",
+    "event-stream": "3.3.2",
+    "express": "4.13.4",
+    "http": "0.0.0",
+    "morgan": "1.7.0",
+    "q": "1.4.1",
+    "request-promise": "3.0.0",
+    "underscore": "1.8.3",
+    "ws": "1.1.0"
+  },
+  "author": "",
+  "license": "GPLv3",
+  "devDependencies": {
+    "mocha": "3.1.2",
+    "should": "^11.1.1"
+  }
+}
