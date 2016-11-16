@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RML8 WS</title>
+</head>
+<body>
+<script type="text/javascript">
+  var sock = new WebSocket('ws://localhost:10500/ws/data');
+  sock.onmessage = function(msg) {
+    var data = JSON.parse(msg.data);
+    var message = "Nouvelle donnée ! ";
+    if (data.documentType == 'peer') {
+      message = "Nouvelle fiche de pair !";
+    }
+    else if (data.documentType == 'block') {
+      message = ">> Nouveau bloc !";
+    }
+    console.log('Message console : nouvelle donnée !');
+    document.getElementById('messages').innerHTML += "<p>" + message  + "</p>";
+  };
+</script>
+<div id="messages"></div>
+</body>
+</html>
