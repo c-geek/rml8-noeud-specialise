@@ -47,6 +47,7 @@ duniter.statics.cli((duniterServer) => co(function*() {
 	app.get('/rss', (req, res) => co(function *() {
 	    try {
 		var xml = feed.xml({indent: true});
+    res.type('application/xml');
 		res.status(200).send(xml);
 	    } catch (e) {
 		// En cas d'exception, afficher le message
