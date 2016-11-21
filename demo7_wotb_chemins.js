@@ -31,7 +31,7 @@ duniter.statics.cli((duniterServer) => co(function*() {
     const uidB = 'inso';
 
     // Décommenter la ligne ci-dessous pour forcer le nombre de sauts à une valeur différente
-    duniterServer.conf.stepMax = 3;
+    // duniterServer.conf.stepMax = 3;
 
     // Prend 2 identités
     const identiteA = (yield duniterServer.dal.idtyDAL.query('SELECT * FROM idty WHERE uid = ?', [uidA]))[0];
