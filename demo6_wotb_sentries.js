@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 "use strict";
 
-const co      = require('co');
-const duniter = require('duniter');
+const co        = require('co');
+const duniter   = require('duniter');
+const constants = require('duniter/app/lib/constants');
 
 const HOME_DUNITER_DATA_FOLDER = 'rml8';
 
@@ -27,7 +28,17 @@ duniter.statics.cli((duniterServer) => co(function*() {
      ***************************************/
 
     // Trouve les points de contrôle efficacement grâce au module C (nommé "wotb")
-    const pointsDeControle = duniterServer.dal.wotb.getSentries(duniterServer.conf.stepMax);
+
+    const head = yield duniterServer.dal.getCurrentBlockOrNull();
+    const membersCount = head ? head.membersCount : 0;
+    let dSen;
+    if (head.version <= 3) {
+      dSen = Math.ceil(constants.CONTRACT.DSEN_P * Math.exp(Math.log(membersCount) / duniterServer.conf.stepMax));
+    } else {
+      dSen = Math.ceil(Math.pow(membersCount, 1 / duniterServer.conf.stepMax));
+    }
+
+    const pointsDeControle = duniterServer.dal.wotb.getSentries(dSen);
     // Récupère les identités complètes
     const identitesDeControle = yield pointsDeControle.map((sentryWotID) => {
       // Va chercher en base de données l'identité par son identifiant wotb
